@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>JEE 2026</title>
 </head>
+
 <body>
 
-<nav class="side-nav">
-    <a href="#" onclick="showContent('TT')">Time Table</a>
-    <a href="#" onclick="showContent('MN')">Maths Notes</a>
-    <a href="#" onclick="showContent('PN')">Physics Notes</a>
-    <a href="#" onclick="showContent('CN')">Chemistry Notes</a>
-	<a href="#" onclick="showContent('TPK')">Test Paper and Keys</a>
-	<!-- <a href="#" onclick="showContent('Red Error Handling')">Red Error Handling</a> -->
-	<!-- <a href="#" onclick="showContent('Examples')">Examples</a> -->
-	
-</nav>
-<div class="content" id="TT">
-	<h1>Time Table</h1>
-	
-<table id="issueTable">
-    <thead>
-        <tr>
-            <th onclick="sortTable(0)">Date</th>
-            <th onclick="sortTable(1)">Test</th>
-            <!-- <th onclick="sortTable(2)">Current status</th> -->
-            <!-- <th onclick="sortTable(3)">Closing status</th> -->
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            
-            <td><a href="timetable/20240718/CLASS-11_ELITE_IIT(PHASE-1 & 2)_IT-06_10-AUGUST-2024 Notice.pdf" target="_blank">0013</a></td>
-            <td>Blank footnote filled by the junk character by the performer</td>
-            <td>Updated to production team</td>
-            <td>Fixed</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-<script src="script.js"></script>
+    <nav class="side-nav">
+        <a href="#" onclick="showContent('TT')">Time Table</a>
+        <a href="#" onclick="showContent('MN')">Maths Notes</a>
+        <a href="#" onclick="showContent('PN')">Physics Notes</a>
+        <a href="#" onclick="showContent('CN')">Chemistry Notes</a>
+        <a href="#" onclick="showContent('TPK')">Test Paper and Keys</a>
+        <!-- <a href="#" onclick="showContent('Red Error Handling')">Red Error Handling</a> -->
+        <!-- <a href="#" onclick="showContent('Examples')">Examples</a> -->
+
+    </nav>
+    <div class="content" id="TT">
+        <h1>Time Table</h1>
+
+        <table id="issueTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Message Date</th>
+                    <th onclick="sortTable(1)">Test</th>
+                    <th onclick="sortTable(2)">Test Date</th>
+                    <!-- <th onclick="sortTable(3)">Closing status</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-07-18</td>
+                    <td><a href="timetable/20240718/CLASS-11_ELITE_IIT(PHASE-1 & 2)_IT-06_10-AUGUST-2024 Notice.pdf"
+                        target="_blank">Minor Test 06</a></td>
+                    <td>2024-08-10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>
-  
