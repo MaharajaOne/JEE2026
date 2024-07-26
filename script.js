@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
 let currentSortColumn = -1;
 let isAscending = true;
 
-function sortTable(columnIndex) {
-    const table = document.getElementById('Notice');
+function sortTable(columnIndex, tableId) {
+    const table = document.getElementById(tableId);
     const tbody = table.getElementsByTagName('tbody')[0];
     const rows = Array.from(tbody.getElementsByTagName('tr'));
 
