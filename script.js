@@ -1,5 +1,6 @@
 function showContent(contentId) {
     const contents = document.querySelectorAll('.content');
+
     contents.forEach(content => {
         content.classList.remove('active');
     });
@@ -7,6 +8,7 @@ function showContent(contentId) {
     const selectedContent = document.getElementById(contentId);
     if (selectedContent) {
         selectedContent.classList.add('active');
+        // Save the selected content ID to local storage
         localStorage.setItem('selectedContent', contentId);
     } else {
         console.error("Content with ID " + contentId + " not found.");
@@ -23,39 +25,50 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 let currentSortColumn = -1;
-let isAscending = true;
+    let isAscending = true;
 
-function sortTable(columnIndex, tableId) {
-    const table = document.getElementById(tableId);
-    const tbody = table.getElementsByTagName('tbody')[0];
-    const rows = Array.from(tbody.getElementsByTagName('tr'));
+    function sortTable(columnIndex) {
+        const table = document.getElementById('Notice');
+        const tbody = table.getElementsByTagName('tbody')[0];
+        const rows = Array.from(tbody.getElementsByTagName('tr'));
 
-    rows.sort((a, b) => {
-        let aValue = a.getElementsByTagName('td')[columnIndex].innerText;
-        let bValue = b.getElementsByTagName('td')[columnIndex].innerText;
+        rows.sort((a, b) => {
+            const aValue = a.getElementsByTagName('td')[columnIndex].innerText;
+            const bValue = b.getElementsByTagName('td')[columnIndex].innerText;
 
-        if (columnIndex === 0 || columnIndex === 2) {
-            aValue = new Date(aValue);
-            bValue = new Date(bValue);
-            return isAscending ? aValue - bValue : bValue - aValue;
-        } else {
-            return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            if (columnIndex === 0) {
+                // Numeric sorting for the first column
+                return isAscending ? aValue - bValue : bValue - aValue;
+            } else {
+                // Alphabetic sorting for other columns
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            }
+        });
+
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
         }
-    });
 
-    while (tbody.firstChild) {
-        tbody.removeChild(tbody.firstChild);
+        rows.forEach(row => {
+            tbody.appendChild(row);
+        });
+
+        // Toggle sort order
+        if (columnIndex === currentSortColumn) {
+            isAscending = !isAscending;
+        } else {
+            isAscending = true;
+        }
+
+        currentSortColumn = columnIndex;
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('#issueTable tbody a');
 
-    rows.forEach(row => {
-        tbody.appendChild(row);
+        links.forEach(link => {
+            const targetAttribute = link.getAttribute('data-target');
+            if (targetAttribute) {
+                link.setAttribute('target', targetAttribute);
+            }
+        });
     });
-
-    if (columnIndex === currentSortColumn) {
-        isAscending = !isAscending;
-    } else {
-        isAscending = true;
-    }
-
-    currentSortColumn = columnIndex;
-}
