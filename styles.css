@@ -88,6 +88,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed; /* Ensures columns have equal widths */
 }
 
 th, td {
@@ -95,6 +96,7 @@ th, td {
     padding: 8px;
     text-align: left;
     word-wrap: break-word;
+    overflow: hidden; /* Ensures long text doesn't overflow */
 }
 
 th {
@@ -106,21 +108,19 @@ td {
     word-break: break-word; /* Ensure long text wraps within the cell */
 }
 
-.content a {
-    text-decoration: none;
-}
-
-/* Ensuring equal column width for all tables */
-table, th, td {
-    table-layout: fixed;
-    width: 40%; /* Adjust as needed for your design */
-}
+/* Optional: Define specific widths for columns if needed */
+th:nth-child(1), td:nth-child(1) { width: 20%; }
+th:nth-child(2), td:nth-child(2) { width: 20%; }
+th:nth-child(3), td:nth-child(3) { width: 20%; }
+/* Continue for other columns as necessary */
 
 @media screen and (max-width: 768px) {
-    .side-nav {
+    table {
         width: 100%;
-        height: auto;
     }
+}
+
+
 
     .content {
         margin-left: 0;
