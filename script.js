@@ -1,4 +1,3 @@
-// Function to show the selected content
 function showContent(contentId) {
     const contents = document.querySelectorAll('.content');
 
@@ -16,21 +15,19 @@ function showContent(contentId) {
     }
 }
 
-// Event listener for DOMContentLoaded to show the saved content
 document.addEventListener('DOMContentLoaded', function () {
     const selectedContentId = localStorage.getItem('selectedContent');
-    if (selectedContentId) {
-        showContent(selectedContentId);
+    if (!selectedContentId) {
+        console.error("No selected content ID found in local storage.");
     } else {
-        showContent('Notice'); // Default to Notice if no selection saved
+        showContent(selectedContentId);
     }
 });
 
 let currentSortColumn = -1;
 let isAscending = true;
 
-// Function to sort the Notice table
-function sortTable(columnIndex, tableId) {
+function sortTable(tableId, columnIndex) {
     const table = document.getElementById(tableId);
     const tbody = table.getElementsByTagName('tbody')[0];
     const rows = Array.from(tbody.getElementsByTagName('tr'));
@@ -39,11 +36,12 @@ function sortTable(columnIndex, tableId) {
         const aValue = a.getElementsByTagName('td')[columnIndex].innerText;
         const bValue = b.getElementsByTagName('td')[columnIndex].innerText;
 
-        if (columnIndex === 0) {
-            // Date sorting for the first column
-            const dateA = new Date(aValue);
-            const dateB = new Date(bValue);
-            return isAscending ? dateA - dateB : dateB - dateA;
+        if (tableId === 'Notice' && columnIndex === 0) {
+            // Date sorting for the first column in "Notice" table
+            return isAscending ? new Date(aValue) - new Date(bValue) : new Date(bValue) - new Date(aValue);
+        } else if (!isNaN(aValue) && !isNaN(bValue)) {
+            // Numeric sorting for numeric columns
+            return isAscending ? aValue - bValue : bValue - aValue;
         } else {
             // Alphabetic sorting for other columns
             return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
@@ -68,11 +66,6 @@ function sortTable(columnIndex, tableId) {
     currentSortColumn = columnIndex;
 }
 
-// Function to sort the MN table
-function sortMNTable(columnIndex) {
-    sortTable(columnIndex, 'MN');
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     const links = document.querySelectorAll('#issueTable tbody a');
 
@@ -81,5 +74,16 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetAttribute) {
             link.setAttribute('target', targetAttribute);
         }
+    });
+
+    // Add event listeners for sortable columns
+    const noticeTableHeaders = document.querySelectorAll('#Notice th');
+    noticeTableHeaders.forEach((header, index) => {
+        header.addEventListener('click', () => sortTable('Notice', index));
+    });
+
+    const mnTableHeaders = document.querySelectorAll('#MN th');
+    mnTableHeaders.forEach((header, index) => {
+        header.addEventListener('click', () => sortTable('MN', index));
     });
 });
