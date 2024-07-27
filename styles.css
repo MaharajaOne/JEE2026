@@ -88,7 +88,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: auto; /* Ensures columns have equal widths */
+    /*table-layout: auto; /* Ensures columns have equal widths */
 }
 
 th, td {
@@ -96,7 +96,7 @@ th, td {
     padding: 8px;
     text-align: left;
     word-wrap: break-word;
-    overflow: hidden; /* Ensures long text doesn't overflow */
+   /* overflow: hidden; /* Ensures long text doesn't overflow */
 }
 
 th {
@@ -117,12 +117,10 @@ th:nth-child(3), td:nth-child(3) { width: 27%; }
 /* Continue for other columns as necessary */
 
 @media screen and (max-width: 768px) {
-    table {
+    .side-nav {
         width: 100%;
+        height: auto;
     }
-}
-
-
 
     .content {
         margin-left: 0;
