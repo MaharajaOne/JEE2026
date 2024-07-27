@@ -88,7 +88,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: fixed; /* Ensures columns have equal widths */
+    table-layout: auto; /* Ensures columns have equal widths */
 }
 
 th, td {
@@ -109,9 +109,11 @@ td {
 }
 
 /* Optional: Define specific widths for columns if needed */
-th:nth-child(1), td:nth-child(1) { width: 20%; }
-th:nth-child(2), td:nth-child(2) { width: 20%; }
-th:nth-child(3), td:nth-child(3) { width: 20%; }
+th:nth-child(1), td:nth-child(1) { width: 8%; }
+th:nth-child(2), td:nth-child(2) { width: 12%; }
+th:nth-child(3), td:nth-child(3) { width: 25%; }
+th:nth-child(3), td:nth-child(3) { width: 28%; }
+th:nth-child(3), td:nth-child(3) { width: 27%; }
 /* Continue for other columns as necessary */
 
 @media screen and (max-width: 768px) {
