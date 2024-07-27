@@ -113,7 +113,7 @@ td {
 /* Ensuring equal column width for all tables */
 table, th, td {
     table-layout: fixed;
-    width: 25%; /* Adjust as needed for your design */
+    width: 40%; /* Adjust as needed for your design */
 }
 
 @media screen and (max-width: 768px) {
