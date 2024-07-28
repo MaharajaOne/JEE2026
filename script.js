@@ -86,4 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
     mnTableHeaders.forEach((header, index) => {
         header.addEventListener('click', () => sortTable('MN', index));
     });
+    
+    const pnTableHeaders = document.querySelectorAll('#PN th');
+    pnTableHeaders.forEach((header, index) => {
+        header.addEventListener('click', () => sortTable('PN', index));
+    });
 });

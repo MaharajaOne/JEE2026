@@ -52,7 +52,7 @@ h1 {
     background-color: #f0f0f0; /* Background color */
     padding: 10px 20px; /* Padding around the text */
     margin-bottom: 10px;
-    width: 100%;
+    width: auto;
     display: inline-block; /* Allows the background color to span the text width */
 }
 
@@ -61,7 +61,7 @@ h2 {
     font-style: italic;
     padding: 10px 20px; /* Padding around the text */
     margin-bottom: 10px;
-    width: 100%;
+    width: auto;
     display: inline-block; /* Allows the background color to span the text width */
 }
 
@@ -109,11 +109,11 @@ td {
 }
 
 /* Optional: Define specific widths for columns if needed */
-th:nth-child(1), td:nth-child(1) { width: 5%; }
-th:nth-child(2), td:nth-child(2) { width: 8%; }
-th:nth-child(3), td:nth-child(3) { width: 12%; }
-th:nth-child(3), td:nth-child(3) { width: 30%; }
-th:nth-child(3), td:nth-child(3) { width: 45%; }
+th:nth-child(1), td:nth-child(1) { width: fit-content; }
+th:nth-child(2), td:nth-child(2) { width: fit-content; }
+th:nth-child(3), td:nth-child(3) { width: fit-content; }
+th:nth-child(3), td:nth-child(3) { width: fit-content; }
+th:nth-child(3), td:nth-child(3) { width: fit-content; }
 /* Continue for other columns as necessary */
 
 @media screen and (max-width: 768px) {
