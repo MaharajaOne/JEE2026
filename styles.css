@@ -86,7 +86,7 @@ h2 {
 }
 
 table {
-    width: fit-content;
+    width: 85%;
     border-collapse: collapse;
     margin-top: 20px;
     /*table-layout: auto; /* Ensures columns have equal widths */
