@@ -1,118 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEE 2026 Analysis</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Test Analysis</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #test-analysis-content {
+            display: none; /* Hidden by default */
+        }
+    </style>
 </head>
-
 <body>
-
-    <h1>Test Scores Analysis</h1>
-
-    <canvas id="totalScoresChart" width="400" height="200"></canvas>
-    <canvas id="rankTrendChart" width="400" height="200"></canvas>
-    <canvas id="subjectScoresChart" width="400" height="200"></canvas>
+    <h1>Test Analysis</h1>
+    <div id="test-analysis-content">
+        <!-- Content of Test Analysis -->
+        <p>This is the content of the Test Analysis section.</p>
+    </div>
 
     <script>
-        const data = {
-            tests: ["Minor Test 1", "Minor Test 2", "Minor Test 3"],
-            totalScores: [493, 474, 451],
-            ranks: [27, 35, 44],
-            mathsScores: [32, 25, 24],
-            physicsScores: [45, 36, 32],
-            chemistryScores: [55, 44, 48]
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to handle the content display
+            function showContent(contentId) {
+                const contents = document.querySelectorAll('.content');
 
-        // Total Scores Trend
-        const ctxTotal = document.getElementById('totalScoresChart').getContext('2d');
-        new Chart(ctxTotal, {
-            type: 'line',
-            data: {
-                labels: data.tests,
-                datasets: [{
-                    label: 'Total Scores',
-                    data: data.totalScores,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: false
+                // Remove the 'active' class from all content sections
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                const selectedContent = document.getElementById(contentId);
+
+                if (selectedContent) {
+                    if (contentId === 'TA') {
+                        // Fetch and load the content of testanalysis.html if TA is selected
+                        fetch('testanalysis.html')
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log('Test Analysis data:', data); // Debugging line
+                                selectedContent.innerHTML = data;
+                                selectedContent.classList.add('active');
+                                localStorage.setItem('selectedContent', contentId);
+                            })
+                            .catch(error => console.error('Error loading content:', error));
+                    } else {
+                        // Just show the selected content if not 'TA'
+                        selectedContent.classList.add('active');
+                        localStorage.setItem('selectedContent', contentId);
                     }
+                } else {
+                    console.error("Content with ID " + contentId + " not found.");
                 }
             }
-        });
 
-        // Rank Trend
-        const ctxRank = document.getElementById('rankTrendChart').getContext('2d');
-        new Chart(ctxRank, {
-            type: 'line',
-            data: {
-                labels: data.tests,
-                datasets: [{
-                    label: 'Rank',
-                    data: data.ranks,
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        reverse: true,  // Lower rank is better
-                        beginAtZero: false
-                    }
-                }
-            }
-        });
-
-        // Subject Scores Comparison
-        const ctxSubject = document.getElementById('subjectScoresChart').getContext('2d');
-        new Chart(ctxSubject, {
-            type: 'bar',
-            data: {
-                labels: data.tests,
-                datasets: [
-                    {
-                        label: 'Maths',
-                        data: data.mathsScores,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Physics',
-                        data: data.physicsScores,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Chemistry',
-                        data: data.chemistryScores,
-                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                        borderColor: 'rgba(255, 206, 86, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            // Call the function or set up any event listeners you need
+            showContent('TA');
         });
     </script>
-
 </body>
-
 </html>
