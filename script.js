@@ -1,28 +1,36 @@
 function showContent(contentId) {
     const contents = document.querySelectorAll('.content');
 
+    // Remove the 'active' class from all content sections
     contents.forEach(content => {
         content.classList.remove('active');
     });
 
     const selectedContent = document.getElementById(contentId);
+    
     if (selectedContent) {
-        selectedContent.classList.add('active');
-        // Save the selected content ID to local storage
-        localStorage.setItem('selectedContent', contentId);
+        if (contentId === 'TA') {
+            // Fetch and load the content of testanalysis.html if TA is selected
+            fetch('testanalysis.html')
+                .then(response => response.text())
+                .then(data => {
+                    selectedContent.innerHTML = data;
+                    selectedContent.classList.add('active');
+                    // Save the selected content ID to local storage
+                    localStorage.setItem('selectedContent', contentId);
+                })
+                .catch(error => console.error('Error loading content:', error));
+        } else {
+            // Just show the selected content if not 'TA'
+            selectedContent.classList.add('active');
+            // Save the selected content ID to local storage
+            localStorage.setItem('selectedContent', contentId);
+        }
     } else {
         console.error("Content with ID " + contentId + " not found.");
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const selectedContentId = localStorage.getItem('selectedContent');
-    if (!selectedContentId) {
-        console.error("No selected content ID found in local storage.");
-    } else {
-        showContent(selectedContentId);
-    }
-});
 
 let currentSortColumn = -1;
 let isAscending = true;
