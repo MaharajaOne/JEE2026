@@ -12,24 +12,19 @@ function showContent(contentId) {
         if (contentId === 'TA') {
             // Fetch and load the content of testanalysis.html if TA is selected
             fetch('testanalysis.html')
-                .then(response => response.text())
-                .then(data => {
-                    selectedContent.innerHTML = data;
-                    selectedContent.classList.add('active');
-                    // Save the selected content ID to local storage
-                    localStorage.setItem('selectedContent', contentId);
-                })
-                .catch(error => console.error('Error loading content:', error));
-        } else {
-            // Just show the selected content if not 'TA'
-            selectedContent.classList.add('active');
-            // Save the selected content ID to local storage
-            localStorage.setItem('selectedContent', contentId);
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
         }
-    } else {
-        console.error("Content with ID " + contentId + " not found.");
-    }
-}
+        return response.text();
+    })
+    .then(data => {
+        console.log('Data fetched successfully:', data);  // Debugging line
+        selectedContent.innerHTML = data;
+        selectedContent.classList.add('active');
+        localStorage.setItem('selectedContent', contentId);
+    })
+    .catch(error => console.error('Error loading content:', error));
 
 
 let currentSortColumn = -1;
