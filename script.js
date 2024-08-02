@@ -1,3 +1,25 @@
+function showContent(id) {
+    // Hide all content sections
+    var contents = document.querySelectorAll('.content');
+    contents.forEach(function(content) {
+        content.style.display = 'none';
+    });
+
+    // Show the selected content
+    document.getElementById(id).style.display = 'block';
+
+    // Load external content for Test Analysis
+    if (id === 'TA') {
+        fetch('testanalysis.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('TA').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading the Test Analysis content:', error));
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Load previously selected content from localStorage
     const selectedContentId = localStorage.getItem('selectedContent');
@@ -80,26 +102,6 @@ function sortTable(tableId, columnIndex) {
     });
 
     currentSortColumn[tableId] = columnIndex;
-}
-function showContent(id) {
-    // Hide all content sections
-    var contents = document.querySelectorAll('.content');
-    contents.forEach(function(content) {
-        content.style.display = 'none';
-    });
-
-    // Show the selected content
-    document.getElementById(id).style.display = 'block';
-
-    // Load external content for Test Analysis
-    if (id === 'TA') {
-        fetch('testanalysis.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('TA').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading the Test Analysis content:', error));
-    }
 }
 
 function sortTable(n) {

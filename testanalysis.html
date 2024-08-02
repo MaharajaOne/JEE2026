@@ -22,13 +22,17 @@
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            word-wrap: break-word; /* Ensures content fits within cells */
         }
         th {
             background-color: #f2f2f2;
             font-weight: bold;
         }
-        tr:hover {
+        tr:nth-child(even) {
             background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e0e0e0;
         }
         caption {
             padding: 12px;
@@ -42,7 +46,8 @@
 <body>
     <h1>Test Results</h1>
     <table>
-                <thead>
+        <caption>Test Scores Table</caption>
+        <thead>
             <tr>
                 <th>Date</th>
                 <th>Test</th>
