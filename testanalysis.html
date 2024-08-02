@@ -22,11 +22,12 @@
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            word-wrap: break-word; /* Ensures content fits within cells */
+            word-wrap: break-word;
         }
         th {
             background-color: #f2f2f2;
             font-weight: bold;
+            cursor: pointer;
         }
         tr:nth-child(even) {
             background-color: #f9f9f9;
@@ -44,8 +45,8 @@
     </style>
 </head>
 <body>
-    <h1>Test Results</h1>
-    <table>
+    <h1>Test Results with sort table</h1>
+    <table id="testTable">
         <caption>Test Scores Table</caption>
         <thead>
             <tr>
@@ -68,6 +69,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Table rows here -->
             <tr>
                 <td>27-Jul</td>
                 <td>Internal Test 5 - Paper 1</td>
@@ -86,79 +88,43 @@
                 <td>42</td>
                 <td>36</td>
             </tr>
-            <tr>
-                <td>13-Jul</td>
-                <td>Major Test 4</td>
-                <td>58</td>
-                <td>198</td>
-                <td>122</td>
-                <td>458</td>
-                <td>31</td>
-                <td>54</td>
-                <td>17</td>
-                <td>55%</td>
-                <td>14</td>
-                <td>44.9</td>
-                <td>198</td>
-                <td>10</td>
-                <td>16</td>
-                <td>32</td>
-            </tr>
-            <tr>
-                <td>29-Jun</td>
-                <td>Internal Test 3 - Paper 1</td>
-                <td>154</td>
-                <td>300</td>
-                <td>133</td>
-                <td>471</td>
-                <td>56</td>
-                <td>75</td>
-                <td>42</td>
-                <td>75%</td>
-                <td>14</td>
-                <td>122.2</td>
-                <td>300</td>
-                <td>46</td>
-                <td>52</td>
-                <td>56</td>
-            </tr>
-            <tr>
-                <td>15-Jun</td>
-                <td>Internal Test 2 - Paper 1</td>
-                <td>212</td>
-                <td>300</td>
-                <td>62</td>
-                <td>456</td>
-                <td>58</td>
-                <td>75</td>
-                <td>54</td>
-                <td>93%</td>
-                <td>4</td>
-                <td>124.6</td>
-                <td>300</td>
-                <td>71</td>
-                <td>62</td>
-                <td>79</td>
-            </tr>
-            <tr>
-                <td>27-Apr</td>
-                <td>Internal Test 1 - Paper 1</td>
-                <td>161</td>
-                <td>300</td>
-                <td>76</td>
-                <td>392</td>
-                <td>49</td>
-                <td>75</td>
-                <td>42</td>
-                <td>86%</td>
-                <td>7</td>
-                <td>102.4</td>
-                <td>300</td>
-                <td>55</td>
-                <td>62</td>
-                <td>44</td>
-            </tr>
+            <!-- More rows -->
         </tbody>
     </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.getElementById('testTable');
+            const headers = table.querySelectorAll('th');
+            const tbody = table.querySelector('tbody');
+
+            headers.forEach((header, index) => {
+                header.addEventListener('click', () => {
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+                    const isAscending = header.classList.contains('asc');
+                    
+                    rows.sort((a, b) => {
+                        const aText = a.children[index].innerText.trim();
+                        const bText = b.children[index].innerText.trim();
+
+                        if (!isNaN(aText) && !isNaN(bText)) {
+                            return isAscending 
+                                ? parseFloat(aText) - parseFloat(bText) 
+                                : parseFloat(bText) - parseFloat(aText);
+                        }
+                        return isAscending
+                            ? aText.localeCompare(bText)
+                            : bText.localeCompare(aText);
+                    });
+
+                    header.classList.toggle('asc', !isAscending);
+                    header.classList.toggle('desc', isAscending);
+                    
+                    tbody.innerHTML = '';
+                    rows.forEach(row => tbody.appendChild(row));
+                });
+            });
+        });
+    </script>
 </body>
 </html>
