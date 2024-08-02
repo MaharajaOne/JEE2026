@@ -3,68 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Analysis</title>
+    <title>Test Scores Table</title>
     <style>
-        /* Add some basic styling */
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
+            margin: 20px;
+            background-color: #f4f4f4;
         }
-        #test-analysis-content {
-            display: none; /* Hidden by default */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        caption {
+            padding: 10px;
+            caption-side: top;
+            font-size: 1.5em;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Test Analysis</h1>
-    <div id="test-analysis-content">
-        <!-- Content of Test Analysis -->
-        <p>This is the content of the Test Analysis section.</p>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Function to handle the content display
-            function showContent(contentId) {
-                const contents = document.querySelectorAll('.content');
-
-                // Remove the 'active' class from all content sections
-                contents.forEach(content => {
-                    content.classList.remove('active');
-                });
-
-                const selectedContent = document.getElementById(contentId);
-
-                if (selectedContent) {
-                    if (contentId === 'TA') {
-                        // Fetch and load the content of testanalysis.html if TA is selected
-                        fetch('testanalysis.html')
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok ' + response.statusText);
-                                }
-                                return response.text();
-                            })
-                            .then(data => {
-                                console.log('Test Analysis data:', data); // Debugging line
-                                selectedContent.innerHTML = data;
-                                selectedContent.classList.add('active');
-                                localStorage.setItem('selectedContent', contentId);
-                            })
-                            .catch(error => console.error('Error loading content:', error));
-                    } else {
-                        // Just show the selected content if not 'TA'
-                        selectedContent.classList.add('active');
-                        localStorage.setItem('selectedContent', contentId);
-                    }
-                } else {
-                    console.error("Content with ID " + contentId + " not found.");
-                }
-            }
-
-            // Call the function or set up any event listeners you need
-            showContent('TA');
-        });
-    </script>
+    <h1>Test Scores</h1>
+    <table>
+        <caption>Test Results</caption>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Test</th>
+                <th>Marks</th>
+                <th>Out of</th>
+                <th>Rank</th>
+                <th>Total</th>
+                <th>Attempt</th>
+                <th>Out of</th>
+                <th>Correct</th>
+                <th>Accuracy</th>
+                <th>Wrong</th>
+                <th>Class Average</th>
+                <th>Out of</th>
+                <th>Maths</th>
+                <th>Physics</th>
+                <th>Chemistry</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>27-Jul</td>
+                <td>Internal Test 5 - Paper 1</td>
+                <td>103</td>
+                <td>300</td>
+                <td>152</td>
+                <td>479</td>
+                <td>52</td>
+                <td>75</td>
+                <td>31</td>
+                <td>60%</td>
+                <td>21</td>
+                <td>89.6</td>
+                <td>300</td>
+                <td>25</td>
+                <td>42</td>
+                <td>36</td>
+            </tr>
+            <tr>
+                <td>13-Jul</td>
+                <td>Major Test 4</td>
+                <td>58</td>
+                <td>198</td>
+                <td>122</td>
+                <td>458</td>
+                <td>31</td>
+                <td>54</td>
+                <td>17</td>
+                <td>55%</td>
+                <td>14</td>
+                <td>44.9</td>
+                <td>198</td>
+                <td>10</td>
+                <td>16</td>
+                <td>32</td>
+            </tr>
+            <tr>
+                <td>29-Jun</td>
+                <td>Internal Test 3 - Paper 1</td>
+                <td>154</td>
+                <td>300</td>
+                <td>133</td>
+                <td>471</td>
+                <td>56</td>
+                <td>75</td>
+                <td>42</td>
+                <td>75%</td>
+                <td>14</td>
+                <td>122.2</td>
+                <td>300</td>
+                <td>46</td>
+                <td>52</td>
+                <td>56</td>
+            </tr>
+            <tr>
+                <td>15-Jun</td>
+                <td>Internal Test 2 - Paper 1</td>
+                <td>212</td>
+                <td>300</td>
+                <td>62</td>
+                <td>456</td>
+                <td>58</td>
+                <td>75</td>
+                <td>54</td>
+                <td>93%</td>
+                <td>4</td>
+                <td>124.6</td>
+                <td>300</td>
+                <td>71</td>
+                <td>62</td>
+                <td>79</td>
+            </tr>
+            <tr>
+                <td>27-Apr</td>
+                <td>Internal Test 1 - Paper 1</td>
+                <td>161</td>
+                <td>300</td>
+                <td>76</td>
+                <td>392</td>
+                <td>49</td>
+                <td>75</td>
+                <td>42</td>
+                <td>86%</td>
+                <td>7</td>
+                <td>102.4</td>
+                <td>300</td>
+                <td>55</td>
+                <td>62</td>
+                <td>44</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
